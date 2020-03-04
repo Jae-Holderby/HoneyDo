@@ -5,20 +5,17 @@ using System.Threading.Tasks;
 using Data;
 using Domain;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
-namespace Application.Things
+namespace Application.Persons
 {
     public class Create
     {
-        public class Command : IRequest
+       public class Command : IRequest
         {
-            public Guid Id { get; set; }
-            [Required]
-            [StringLength(60, MinimumLength = 6)]
-            public string Description { get; set; }
-            public DateTime Date { get; set; }
-            public string PhoneNumber { get; set; }
+            [StringLength(10, MinimumLength = 10)]
+           public string PhoneNumber { get; set; }
+           [Required]
+           public string Name { get; set; }
         }
 
         public class Handler : IRequestHandler<Command>
@@ -31,21 +28,19 @@ namespace Application.Things
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var thing = new Thing
+                var person = new Person
                 {
-                    Id = request.Id,
-                    Description = request.Description,
-                    Date = request.Date
+                    PhoneNumber = request.PhoneNumber,
+                    Name = request.Name
                 };
-
-                _context.Things.Add(thing);
-                                
+                
+                _context.Persons.Add(person);
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if(success) return Unit.Value;
 
                 throw new Exception("Problem saving changes");
             }
-        }
+        } 
     }
 }

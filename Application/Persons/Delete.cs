@@ -1,23 +1,15 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using Data;
-using Domain;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
-namespace Application.Things
+namespace Application.Persons
 {
-    public class Create
+    public class Delete
     {
-        public class Command : IRequest
+       public class Command : IRequest
         {
-            public Guid Id { get; set; }
-            [Required]
-            [StringLength(60, MinimumLength = 6)]
-            public string Description { get; set; }
-            public DateTime Date { get; set; }
             public string PhoneNumber { get; set; }
         }
 
@@ -31,21 +23,19 @@ namespace Application.Things
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var thing = new Thing
-                {
-                    Id = request.Id,
-                    Description = request.Description,
-                    Date = request.Date
-                };
+                var person = await _context.Persons.FindAsync(request.PhoneNumber);
 
-                _context.Things.Add(thing);
-                                
+                if (person == null)
+                    throw new Exception("Could not find activity");
+
+                _context.Remove(person);
+
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if(success) return Unit.Value;
 
                 throw new Exception("Problem saving changes");
             }
-        }
+        } 
     }
 }

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using Data;
+using Domain;
 using MediatR;
 
 namespace Application.Things
@@ -16,7 +17,7 @@ namespace Application.Things
             public string Description { get; set; }
             public DateTime? Date { get; set; }
             [StringLength(10, MinimumLength = 10)]
-            public string PhoneNumber { get; set; } 
+            public string PhoneNumber { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -35,7 +36,6 @@ namespace Application.Things
                 
                 thing.Description = request.Description ?? thing.Description;
                 thing.Date = request.Date ?? thing.Date;
-                thing.PhoneNumber = request.PhoneNumber ?? thing.PhoneNumber;
 
                 var success = await _context.SaveChangesAsync() > 0;
 

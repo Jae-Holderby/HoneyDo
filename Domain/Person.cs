@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain
@@ -6,6 +7,6 @@ namespace Domain
     {
         [Key]
         public string PhoneNumber { get; set; }
-        public string Name { get; set; }       
+        public string Name { get; set; } 
     }
 }

@@ -3,24 +3,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using Data;
-using Domain;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
-namespace Application.Things
+namespace Application.Persons
 {
-    public class Create
+    public class Edit
     {
         public class Command : IRequest
         {
-            public Guid Id { get; set; }
-            [Required]
-            [StringLength(60, MinimumLength = 6)]
-            public string Description { get; set; }
-            public DateTime Date { get; set; }
-            public string PhoneNumber { get; set; }
+            [StringLength(10, MinimumLength = 10)]
+           public string PhoneNumber { get; set; }
+           [Required]
+           public string Name { get; set; }
         }
-
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
@@ -31,15 +26,13 @@ namespace Application.Things
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var thing = new Thing
-                {
-                    Id = request.Id,
-                    Description = request.Description,
-                    Date = request.Date
-                };
+                var person = await _context.Persons.FindAsync(request.PhoneNumber);
 
-                _context.Things.Add(thing);
-                                
+                if(person ==  null)
+                    throw new Exception("Could not find activity");
+                
+                person.Name = request.Name ?? person.Name;
+
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if(success) return Unit.Value;

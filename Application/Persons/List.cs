@@ -6,13 +6,13 @@ using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Things
+namespace Application.Persons
 {
     public class List
     {
-        public class Query : IRequest<List<Thing>> {}
+        public class Query : IRequest<List<Person>> {}
 
-        public class Handler : IRequestHandler<Query, List<Thing>>
+        public class Handler : IRequestHandler<Query, List<Person>>
         {
             private readonly DataContext _context;
             public Handler(DataContext context)
@@ -21,12 +21,13 @@ namespace Application.Things
 
             }
 
-            public async Task<List<Thing>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<Person>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var things = await _context.Things.ToListAsync(cancellationToken);
-            
-                return things;
+                var persons = await _context.Persons.ToListAsync(cancellationToken);
+
+                return persons;
             }
         }
+
     }
 }

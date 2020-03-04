@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class PersonsandThings : Migration
+    public partial class ThingsAndPersons : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
