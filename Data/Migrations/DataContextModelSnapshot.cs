@@ -16,19 +16,6 @@ namespace Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.2");
 
-            modelBuilder.Entity("Domain.Person", b =>
-                {
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("PhoneNumber");
-
-                    b.ToTable("Persons");
-                });
-
             modelBuilder.Entity("Domain.Thing", b =>
                 {
                     b.Property<Guid>("Id")

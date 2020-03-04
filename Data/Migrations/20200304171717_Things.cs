@@ -3,22 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class ThingsAndPersons : Migration
+    public partial class Things : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Persons",
-                columns: table => new
-                {
-                    PhoneNumber = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Persons", x => x.PhoneNumber);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Things",
                 columns: table => new
@@ -36,9 +24,6 @@ namespace Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Persons");
-
             migrationBuilder.DropTable(
                 name: "Things");
         }

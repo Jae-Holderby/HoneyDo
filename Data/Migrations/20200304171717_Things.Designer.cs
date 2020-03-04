@@ -9,27 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200304112150_ThingsAndPersons")]
-    partial class ThingsAndPersons
+    [Migration("20200304171717_Things")]
+    partial class Things
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.2");
-
-            modelBuilder.Entity("Domain.Person", b =>
-                {
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("PhoneNumber");
-
-                    b.ToTable("Persons");
-                });
 
             modelBuilder.Entity("Domain.Thing", b =>
                 {
