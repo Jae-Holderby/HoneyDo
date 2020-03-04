@@ -36,6 +36,7 @@ namespace Application.Things
                 
                 thing.Description = request.Description ?? thing.Description;
                 thing.Date = request.Date ?? thing.Date;
+                thing.PhoneNumber = request.PhoneNumber ?? thing.PhoneNumber;
 
                 var success = await _context.SaveChangesAsync() > 0;
 

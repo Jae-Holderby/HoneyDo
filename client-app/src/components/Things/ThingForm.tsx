@@ -1,6 +1,6 @@
 import React, { useState, FormEvent } from 'react'
 import { IThing } from '../../models/Thing'
-import { Segment, Form, Button } from 'semantic-ui-react';
+import { Segment, Form, Button, Label } from 'semantic-ui-react';
 import {v4 as uuid} from 'uuid';
 
 interface IProps {
@@ -24,7 +24,8 @@ export const ThingForm: React.FC<IProps> = ({
             return {
                 id: '',
                 description: '',
-                date: ''
+                date: '',
+                phoneNumber: ''
             };
         }
     };
@@ -51,6 +52,7 @@ export const ThingForm: React.FC<IProps> = ({
     return (
         <Segment clearning>
             <Form onSubmit={submit}>
+            <Label>What toDo?</Label>
                 <Form.TextArea 
                     onChange={update}
                     name='description'
@@ -58,12 +60,20 @@ export const ThingForm: React.FC<IProps> = ({
                     palceholder='What To Do?'
                     value={thing.description}
                 />
+                <Label>When ToDO it?</Label>
                 <Form.Input 
                     onChange={update}
                     type='datetime-local'
                     name='date'
                     palceholder='when to do it?'
                     value={thing.date}
+                />
+                <Label>Phone Number</Label>
+                 <Form.Input 
+                    onChange={update}
+                    type='text'
+                    name='phoneNumber'
+                    value={thing.phoneNumber}
                 />
                 <Button
                     positive 

@@ -16,7 +16,7 @@ export const ThingList: React.FC<IProps> = ({
   selectThing,
   setEditMode,
   openForm,
-  deleteThing
+  deleteThing,
 }) => {
     return (
       <Segment clearing >
@@ -29,6 +29,9 @@ export const ThingList: React.FC<IProps> = ({
               <Card.Description>
                 {thing.date}
               </Card.Description>
+                <Card.Meta>
+                  {thing.phoneNumber}
+                </Card.Meta>
             </Card.Content>
             <Button.Group>
               <Button
@@ -39,7 +42,8 @@ export const ThingList: React.FC<IProps> = ({
                 color='blue'
               >Edit</Button>
               <Button 
-                onClick={() => deleteThing(thing.id)}
+                onClick={() => {
+                  deleteThing(thing.id);}}
                 color='red'
               >Delete</Button>
             </Button.Group>

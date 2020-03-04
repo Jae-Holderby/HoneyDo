@@ -18,6 +18,7 @@ namespace Application.Things
             [StringLength(60, MinimumLength = 6)]
             public string Description { get; set; }
             public DateTime Date { get; set; }
+            [StringLength(10, MinimumLength = 10)]
             public string PhoneNumber { get; set; }
         }
 
@@ -35,7 +36,8 @@ namespace Application.Things
                 {
                     Id = request.Id,
                     Description = request.Description,
-                    Date = request.Date
+                    Date = request.Date,
+                    PhoneNumber = request.PhoneNumber
                 };
 
                 _context.Things.Add(thing);
